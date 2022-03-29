@@ -1,71 +1,94 @@
-/*
- * main.c
- *
- * Created: 3/16/2022 1:17:49 PM
- *  Author: dutch
- */ 
-
 #define F_CPU 8000000UL
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include <string.h>
 #include <stdlib.h>
-#include "lcd.h"
 
-#define  Trigger_pin	PF0	/* Trigger pin */
+#define BIT(x)			(1 << (x))
+#define  TRIGGER_PIN	0	/* Trigger pin */
+#define  ECHO_PIN	7	/* Echo pin */
+#define TICK_CM 58.0
 
 int TimerOverflow = 0;
+char ticksOnTrigger = 0;
+int distance;
 
-ISR(TIMER1_OVF_vect)
+void wait( int ms ) {
+	for (int i=0; i<ms; i++) {
+		_delay_ms( 1 );		// library function (max 30 ms at 8MHz)
+	}
+}
+
+ISR(TIMER2_OVF_vect)
 {
-	TimerOverflow++;	/* Increment Timer Overflow count */
+	TCNT2 = 0;	/* Increment Timer Overflow count */
+}
+
+ISR ( INT7_vect )
+{
+	// Setting the time from the timer on PE7 going high
+	if( PINE & (1 << ECHO_PIN) ) {
+	ticksOnTrigger = TCNT2;
+	}
+	else
+	{
+		unsigned char diff = TCNT2 - ticksOnTrigger;        // Getting the difference from timer and start
+
+		distance = ( diff * ( 32.0 / TICK_CM ) );    // Calculating cm
+
+
+		ticksOnTrigger = 0;                                    // resetting ticksOnTrigger
+	}
+
+}
+
+void Timer_init() {
+	TCNT2 = 0;	/* Clear Timer counter */
+	TIMSK |= 0b01000000;	
+	TCCR2 = 0b00001100;
+	sei();			/* Enable global interrupt */
+}
+
+void Ultrasonic_trigger() {
+		/* Give 10us trigger pulse on trig. pin to HC-SR04 */
+		PORTE |= (1 << TRIGGER_PIN);
+		_delay_us(10);
+		PORTE &= ~(1 << TRIGGER_PIN);
+}
+
+void display_distance_on_lcd() {
+	char string[10];
+	dtostrf(distance, 2, 2, string);/* distance to string */
+	strcat(string, " cm");	/* Concat unit i.e.cm */
+	lcd_clear();
+	lcd_display_text(string);
 }
 
 int main(void)
 {
-	char string[10];
-	long count;
-	double distance;
 	
-	DDRA = 0x01;		/* Make trigger pin as output */
-	PORTD = 0xFF;		/* Turn on Pull-up */
+	DDRD = 0xFF;	
+	
+	EICRB |= 0x40;			// INT1 falling edge, INT0 rising edge
+	EIMSK |= 0x80;			// Enable INT7
+	
+	DDRE &= ~(1 << TRIGGER_PIN);
+	DDRE &= ~(1 << TRIGGER_PIN);
 	
 	lcd_init();
-	(1, 0, "Ultrasonic");
+	lcd_clear();
 	
-	sei();			/* Enable global interrupt */
-	TIMSK = (1 << TOIE1);	/* Enable Timer1 overflow interrupts */
-	TCCR1A = 0;		/* Set all bit to zero Normal operation */
-
+	Timer_init();
+		
 	while(1)
 	{
-		/* Give 10us trigger pulse on trig. pin to HC-SR04 */
-		PORTF |= (1 << Trigger_pin);
-		_delay_us(10);
-		
-		TCNT1 = 0;	/* Clear Timer counter */
-		TCCR1B = 0x41;	/* Capture on rising edge, No prescaler*/
-		TIFR = 1<<ICF1;	/* Clear ICP flag (Input Capture flag) */
-		TIFR = 1<<TOV1;	/* Clear Timer Overflow flag */
 
 		/*Calculate width of Echo by Input Capture (ICP) */
-		
-		while ((TIFR & (1 << ICF1)) == 0);/* Wait for rising edge */
-		TCNT1 = 0;	/* Clear Timer counter */
-		TCCR1B = 0x01;	/* Capture on falling edge, No prescaler */
-		TIFR = 1<<ICF1;	/* Clear ICP flag (Input Capture flag) */
-		TIFR = 1<<TOV1;	/* Clear Timer Overflow flag */
-		TimerOverflow = 0;/* Clear Timer overflow count */
-
-		while ((TIFR & (1 << ICF1)) == 0);/* Wait for falling edge */
-		count = ICR1 + (65535 * TimerOverflow);	/* Take count */
 		/* 8MHz Timer freq, sound speed =343 m/s */
-		distance = (double)count / 466.47;
+		Ultrasonic_trigger();
+		wait(250);
+		display_distance_on_lcd();
 		
-		strcat(string, " cm   ");	/* Concat unit i.e.cm */
-		lcd_clear();
-		lcd_display_text(string);
-		_delay_ms(200);
 	}
 }
