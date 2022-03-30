@@ -8,6 +8,15 @@
 static double get_pow(double value);
 int get_note(int note, int octave);
 
+char get_musical_value(double distance) {
+	if (distance > 50) { // If distance greater than 50 we return silence.
+		return (char)0;
+	}
+	
+	int notes_to_increment = distance / (50 / 12);
+	return (char)(140 - 10 * notes_to_increment);
+}
+
 /*
 Frequencies are calculated using the following formula: 2^N/12 * 440.
 Where:

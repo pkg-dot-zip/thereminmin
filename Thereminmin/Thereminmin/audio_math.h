@@ -10,7 +10,7 @@
 #define AUDIO_MATH_H_
 
 
-
+char get_musical_value(double distance);
 
 
 #endif /* AUDIO_MATH_H_ */

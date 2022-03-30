@@ -4,6 +4,8 @@
 #include <util/delay.h>
 #include <string.h>
 #include <stdlib.h>
+#include "audio_math.h"
+#include "buzzer.h"
 #define INTERVAL  		2273
 
 #define BIT(x)			(1 << (x))
@@ -33,7 +35,7 @@ int main(void)
 		wait(250);
 		display_distance_on_lcd();
 			// toggle bit 7 PORTA
-		
+		BUZZER_change_frequency(get_musical_value(distance));
 		
 	}
 }
