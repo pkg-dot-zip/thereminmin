@@ -19,32 +19,19 @@ void display_distance_on_lcd() {
 	lcd_display_text(string);
 }
 
-// Initialize timer 1: fast PWM at pin PORTB.6 (hundredth ms)
-inline void timer1Init( void )
-{
-	OCR1A = 0x003F;					// 
-	OCR1B = 0x03FF;					// 
-	TCCR1A = 0b01101011;		// compare output OC1A,OC1B,OC1C
-	TCCR1B = 0b00011011;		// fast PWM 8 bit, prescaler=64, RUN
-}
+
 
 int main(void)
 {
 	US_init();
-		DDRB = 0xFF;					// set PORTB for compare output 
-	DDRA = 0xFF;					// set PORTA for output in main program
-	timer1Init();
-	
+	BUZZER_init();
 	
 	while(1)
 	{
-
-		/*Calculate width of Echo by Input Capture (ICP) */
-		/* 8MHz Timer freq, sound speed =343 m/s */
 		
-		wait(10000);
-		
-		PORTB ^= BIT(5);
+		US_trigger();
+		wait(250);
+		display_distance_on_lcd();
 			// toggle bit 7 PORTA
 		
 		

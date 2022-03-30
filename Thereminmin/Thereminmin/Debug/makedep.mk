@@ -4,6 +4,8 @@
 
 audio_math.c
 
+buzzer.c
+
 lcd.c
 
 main.c

@@ -114,6 +114,12 @@
     <Compile Include="audio_math.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="buzzer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="buzzer.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="lcd.c">
       <SubType>compile</SubType>
     </Compile>
