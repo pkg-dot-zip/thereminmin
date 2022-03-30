@@ -15,7 +15,6 @@
 double distance;
 const char *noteToPlay;
 
-
 void display_distance_on_lcd() {
 	char string[10];
 	dtostrf(distance, 2, 2, string);/* distance to string */
@@ -28,8 +27,6 @@ void display_distance_on_lcd() {
 	LCD_set_cursor(40);
 	LCD_display_text(string);
 }
-
-
 
 int main(void)
 {

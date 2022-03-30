@@ -11,11 +11,8 @@ void LCD_strobe_lcd_e(void) {
 	PORTC |= (1<<LCD_E);	// E high
 	_delay_ms(1);			// nodig
 	PORTC &= ~(1<<LCD_E);  	// E low
-	_delay_ms(1);			// nodig?
+	_delay_ms(1);			// nodig
 }
-
-
-
 
 void LCD_write_command(unsigned char byte)
 {
@@ -46,26 +43,24 @@ void LCD_init() {
 	LCD_strobe_lcd_e();
 
 	// Step 3 (table 12)
-	PORTC = 0x20;   // function set
+	PORTC = 0x20;   // function set. Set's the interface data length.
 	LCD_strobe_lcd_e();
-	PORTC = 0x80;
+	PORTC = 0x80; // Shifts display line to second lcd row.
 	LCD_strobe_lcd_e();
 
 	// Step 4 (table 12)
 	PORTC = 0x00;   // Display on/off control
 	LCD_strobe_lcd_e();
-	PORTC = 0xF0;
+	PORTC = 0xC0; // Display on, cursor off and blinking off.
 	LCD_strobe_lcd_e();
 
 	// Step 4 (table 12)
 	PORTC = 0x00;   // Entry mode set
 	LCD_strobe_lcd_e();
-	PORTC = 0x60;
+	PORTC = 0x60; //entry mode set, shift 1 to the right when character is written.
 	LCD_strobe_lcd_e();
 	
-	LCD_write_command(0x01);
-	
-	LCD_clear();
+	LCD_write_command(0x01); // clears screen
 }
 
 void LCD_write_data(unsigned char byte) {
