@@ -17,7 +17,8 @@ char *noteToPlay;
 void display_distance_on_lcd() {
 	char string[10];
 	dtostrf(distance, 2, 2, string);/* distance to string */
-	strcat(string, " cm");	/* Concat unit i.e.cm */
+	strcat(string, " cm ");	/* Concat unit i.e.cm */
+	strcat(string, noteToPlay);
 	lcd_clear();
 	lcd_display_text(string);
 }
