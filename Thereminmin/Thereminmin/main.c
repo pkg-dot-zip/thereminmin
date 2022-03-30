@@ -11,7 +11,7 @@
 #define BIT(x)			(1 << (x))
 
 double distance;
-char *noteToPlay;
+const char *noteToPlay;
 
 
 void display_distance_on_lcd() {
@@ -29,7 +29,7 @@ int main(void)
 {
 	US_init();
 	BUZZER_init();
-	
+	DDRA = 0xFF;
 	while(1)
 	{
 		

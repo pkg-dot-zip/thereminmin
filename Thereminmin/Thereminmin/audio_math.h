@@ -9,7 +9,7 @@
 #ifndef AUDIO_MATH_H_
 #define AUDIO_MATH_H_
 
-extern char *noteToPlay;
+extern const char *noteToPlay;
 
 char get_musical_value(double distance);
 

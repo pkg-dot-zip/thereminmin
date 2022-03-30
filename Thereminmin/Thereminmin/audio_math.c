@@ -5,6 +5,8 @@
  *  Author: ZimonIsHim
  */ 
 
+const char *noteToPlay; // extern from headerfile
+
 char get_musical_value(double distance) {
 	int notes_to_increment;
 	
@@ -59,44 +61,44 @@ char get_musical_value(double distance) {
 	int value_to_return = 0;
 	
 	switch(notes_to_increment) {
-		case 0:
+		case 0: // A
 		value_to_return = 140;
 		break;
-		case 1:
-		value_to_return = 130;
+		case 1: // A#
+		value_to_return = 133;
 		break;
-		case 2:
-		value_to_return = 120;
+		case 2: // B
+		value_to_return = 125;
 		break;
-		case 3:
-		value_to_return = 110;
+		case 3: // C
+		value_to_return = 118;
 		break;
-		case 4:
-		value_to_return = 100;
+		case 4: // C#
+		value_to_return = 111;
 		break;
-		case 5:
-		value_to_return = 90;
+		case 5: // D
+		value_to_return = 103;
 		break;
-		case 6:
-		value_to_return = 80;
+		case 6: // D#
+		value_to_return = 99;
 		break;
-		case 7:
+		case 7: // E
+		value_to_return = 93;
+		break;
+		case 8: // F
+		value_to_return = 89;
+		break;
+		case 9: // F#
+		value_to_return = 84;
+		break;
+		case 10: // G
+		value_to_return = 78;
+		break;
+		case 11: // G#
+		value_to_return = 74;
+		break;
+		case 12: // A
 		value_to_return = 70;
-		break;
-		case 8:
-		value_to_return = 60;
-		break;
-		case 9:
-		value_to_return = 50;
-		break;
-		case 10:
-		value_to_return = 40;
-		break;
-		case 11:
-		value_to_return = 30;
-		break;
-		case 12:
-		value_to_return = 20;
 		break;
 	}
 	
