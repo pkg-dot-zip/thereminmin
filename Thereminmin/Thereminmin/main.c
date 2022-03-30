@@ -11,6 +11,7 @@
 #define BIT(x)			(1 << (x))
 
 double distance;
+char *noteToPlay;
 
 
 void display_distance_on_lcd() {
