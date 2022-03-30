@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include "audio_math.h"
 #include "buzzer.h"
+#include "lcd.h"
 #define INTERVAL  		2273
 
 #define BIT(x)			(1 << (x))
@@ -17,9 +18,13 @@ const char *noteToPlay;
 void display_distance_on_lcd() {
 	char string[10];
 	dtostrf(distance, 2, 2, string);/* distance to string */
+	
 	strcat(string, " cm ");	/* Concat unit i.e.cm */
-	strcat(string, noteToPlay);
 	lcd_clear();
+	lcd_display_text(string);
+	strcpy(string, "note: ");
+	strcat(string, noteToPlay);
+	lcd_set_cursor(40);
 	lcd_display_text(string);
 }
 
