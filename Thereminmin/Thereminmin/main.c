@@ -22,11 +22,10 @@ void display_distance_on_lcd() {
 // Initialize timer 1: fast PWM at pin PORTB.6 (hundredth ms)
 inline void timer1Init( void )
 {
-	OCR1A = 0;					// RED, default, off
-	OCR1B = 0;					// GREEN, default, off
-	OCR1C = 0;					// BLUE, default, off
-	TCCR1A = 0b10101001;		// compare output OC1A,OC1B,OC1C
-	TCCR1B = 0b00001011;		// fast PWM 8 bit, prescaler=64, RUN
+	OCR1A = 0x003F;					// 
+	OCR1B = 0x03FF;					// 
+	TCCR1A = 0b01101011;		// compare output OC1A,OC1B,OC1C
+	TCCR1B = 0b00011011;		// fast PWM 8 bit, prescaler=64, RUN
 }
 
 int main(void)
@@ -35,15 +34,18 @@ int main(void)
 		DDRB = 0xFF;					// set PORTB for compare output 
 	DDRA = 0xFF;					// set PORTA for output in main program
 	timer1Init();
+	
+	
 	while(1)
 	{
 
 		/*Calculate width of Echo by Input Capture (ICP) */
 		/* 8MHz Timer freq, sound speed =343 m/s */
-		US_trigger();
-		wait(250);
-		display_distance_on_lcd();
-		if (distance > 30) OCR1A = (char)distance;			// toggle bit 7 PORTA
+		
+		wait(10000);
+		
+		PORTB ^= BIT(5);
+			// toggle bit 7 PORTA
 		
 		
 	}
