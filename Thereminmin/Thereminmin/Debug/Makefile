@@ -39,6 +39,7 @@ SUBDIRS :=
 C_SRCS +=  \
 ../audio_math.c \
 ../buzzer.c \
+../common.c \
 ../lcd.c \
 ../main.c \
 ../ultrasonic_sensor.c
@@ -53,6 +54,7 @@ ASM_SRCS +=
 OBJS +=  \
 audio_math.o \
 buzzer.o \
+common.o \
 lcd.o \
 main.o \
 ultrasonic_sensor.o
@@ -60,6 +62,7 @@ ultrasonic_sensor.o
 OBJS_AS_ARGS +=  \
 audio_math.o \
 buzzer.o \
+common.o \
 lcd.o \
 main.o \
 ultrasonic_sensor.o
@@ -67,6 +70,7 @@ ultrasonic_sensor.o
 C_DEPS +=  \
 audio_math.d \
 buzzer.d \
+common.d \
 lcd.d \
 main.d \
 ultrasonic_sensor.d
@@ -74,6 +78,7 @@ ultrasonic_sensor.d
 C_DEPS_AS_ARGS +=  \
 audio_math.d \
 buzzer.d \
+common.d \
 lcd.d \
 main.d \
 ultrasonic_sensor.d
@@ -100,6 +105,13 @@ LINKER_SCRIPT_DEP+=
 	
 
 ./buzzer.o: .././buzzer.c
+	@echo Building file: $<
+	@echo Invoking: XC8 C Compiler : 2.31
+	$(QUOTE)C:\Program Files\Microchip\xc8\v2.31\bin\xc8-cc.exe$(QUOTE)  -mcpu=ATmega128  -mdfp="C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\xc8"  -c -x c -funsigned-char -funsigned-bitfields -mext=cci -D__ATmega128__ -DDEBUG  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./common.o: .././common.c
 	@echo Building file: $<
 	@echo Invoking: XC8 C Compiler : 2.31
 	$(QUOTE)C:\Program Files\Microchip\xc8\v2.31\bin\xc8-cc.exe$(QUOTE)  -mcpu=ATmega128  -mdfp="C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\xc8"  -c -x c -funsigned-char -funsigned-bitfields -mext=cci -D__ATmega128__ -DDEBUG  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

@@ -7,6 +7,7 @@
 #include "audio_math.h"
 #include "buzzer.h"
 #include "lcd.h"
+#include "common.h"
 #define INTERVAL  		2273
 
 #define BIT(x)			(1 << (x))
@@ -40,9 +41,8 @@ int main(void)
 	{
 		
 		US_trigger();
-		wait(250);
+		COMMON_wait(250);
 		display_distance_on_lcd();
-			// toggle bit 7 PORTA
 		BUZZER_change_frequency(AUDIO_MATH_get_musical_value(distance));
 		
 	}

@@ -7,9 +7,9 @@
 #define F_CPU 8000000UL
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <util/delay.h>
 #include <string.h>
 #include <stdlib.h>
+#include <util/delay.h>
 
 #define  TRIGGER_PIN	0	// Trigger pin 
 #define  ECHO_PIN	7	// Echo pin 
@@ -18,11 +18,7 @@
 char ticksOnTrigger = 0;
 double distance = 0; //extern
 
-void wait( int ms ) {
-	for (int i=0; i<ms; i++) {
-		_delay_ms( 1 );		// library function (max 30 ms at 8MHz)
-	}
-}
+
 
 //This intterupt triggers after an overflow
 ISR(TIMER2_OVF_vect) {
