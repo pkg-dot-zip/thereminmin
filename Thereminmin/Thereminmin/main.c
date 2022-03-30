@@ -43,7 +43,7 @@ int main(void)
 		wait(250);
 		display_distance_on_lcd();
 			// toggle bit 7 PORTA
-		BUZZER_change_frequency(get_musical_value(distance));
+		BUZZER_change_frequency(AUDIO_MATH_get_musical_value(distance));
 		
 	}
 }
