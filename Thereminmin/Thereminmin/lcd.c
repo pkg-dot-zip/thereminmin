@@ -28,9 +28,9 @@ void LCD_write_command(unsigned char byte)
 }
 
 void LCD_clear() {
-	LCD_write_command (0x01);						//Leeg display
+	LCD_write_command (0x01);						//Clears display
 	_delay_ms(2);
-	LCD_write_command (0x80);						//Cursor terug naar start
+	LCD_write_command (0x80);						//Resets cursor to defaul position
 }
 
 void LCD_init() {
