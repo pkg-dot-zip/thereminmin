@@ -63,6 +63,7 @@ void Timer_init() {
 	sei();			/* Enable global interrupt */
 }
 
+
 void US_trigger() {
 	/* Give 10us trigger pulse on trig. pin to HC-SR04 */
 	PORTE |= (1 << TRIGGER_PIN);
@@ -72,7 +73,5 @@ void US_trigger() {
 
 void US_init() {
 	Timer_init();
-	lcd_init();
-	lcd_clear();
 	US_init_pins();
 }

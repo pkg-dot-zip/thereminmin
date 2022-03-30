@@ -20,21 +20,22 @@ void display_distance_on_lcd() {
 	dtostrf(distance, 2, 2, string);/* distance to string */
 	
 	strcat(string, " cm ");	/* Concat unit i.e.cm */
-	lcd_clear();
-	lcd_display_text(string);
+	LCD_clear();
+	LCD_display_text(string);
 	strcpy(string, "note: ");
 	strcat(string, noteToPlay);
-	lcd_set_cursor(40);
-	lcd_display_text(string);
+	LCD_set_cursor(40);
+	LCD_display_text(string);
 }
 
 
 
 int main(void)
 {
+	LCD_init();
 	US_init();
 	BUZZER_init();
-	DDRA = 0xFF;
+
 	while(1)
 	{
 		

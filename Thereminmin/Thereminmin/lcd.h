@@ -9,9 +9,9 @@
 #ifndef LCD_H
 #define LCD_H
 
-void lcd_init();
-void lcd_clear();
-void lcd_display_text(char *str);
-void lcd_set_cursor(int position);
+void LCD_init();
+void LCD_clear();
+void LCD_display_text(char *str);
+void LCD_set_cursor(int position);
 
 #endif
