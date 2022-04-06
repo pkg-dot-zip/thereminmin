@@ -13,7 +13,7 @@
 
 #define  TRIGGER_PIN	0	// Trigger pin 
 #define  ECHO_PIN	7	// Echo pin 
-#define TICK_CM 58.0
+#define CM_PER_TICK 58.0 // Source: https://www.bananarobotics.com/shop/HC-SR04-Ultrasonic-Distance-Sensor
 
 char ticksOnTrigger = 0;
 double distance = 0; //extern
@@ -31,7 +31,7 @@ ISR ( INT7_vect ) {
 		ticksOnTrigger = TCNT2; //get the amount of ticks at the start of the echo
 	} else {
 		unsigned char diff = TCNT2 - ticksOnTrigger;        // Getting the difference from timer and start
-		distance = ( diff * ( 32.0 / TICK_CM ) );    // distance calculation
+		distance = ( diff * ( 32.0 / CM_PER_TICK ) );    // distance calculation
 		ticksOnTrigger = 0; // resetting the ticks since calculation echo was detected
 	}
 }
