@@ -1,16 +1,16 @@
 <p align="center">
-  <a href="https://github.com/ZimonIsHim/thereminmin" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/1CWWMG5.png" alt="Project logo"></a>
+  <a href="https://github.com/pkg-dot-zip/thereminmin" rel="noopener">
+ <img width=200px height=200px src="" alt="Project logo"></a>
 </p>
 
 <h3 align="center">Thereminmin</h3>
 
 <div align="center">
 
-  [![Stars](https://img.shields.io/github/stars/ZimonIsHim/thereminmin)](https://github.com/ZimonIsHim/thereminmin/stargazers)
-  [![Downloads](https://img.shields.io/github/downloads/ZimonIsHim/thereminmin/total)](https://github.com/ZimonIsHim/thereminmin/releases)
-  [![Last Commit](https://img.shields.io/github/last-commit/ZimonIsHim/thereminmin)](https://github.com/ZimonIsHim/thereminmin/commits/development)
-  [![License](https://img.shields.io/github/license/ZimonIsHim/thereminmin)](/LICENSE)
+  [![Stars](https://img.shields.io/github/stars/pkg-dot-zip/thereminmin)](https://github.com/pkg-dot-zip/thereminmin/stargazers)
+  [![Downloads](https://img.shields.io/github/downloads/pkg-dot-zip/thereminmin/total)](https://github.com/pkg-dot-zip/thereminmin/releases)
+  [![Last Commit](https://img.shields.io/github/last-commit/pkg-dot-zip/thereminmin)](https://github.com/pkg-dot-zip/thereminmin/commits/development)
+  [![License](https://img.shields.io/github/license/pkg-dot-zip/thereminmin)](/LICENSE)
 
 </div>
 
@@ -28,5 +28,5 @@
 Thereminmin is a musical project made in C for the ATmega128. This project was made in college for microcontrollers.
 
 ## ✍️ Authors <a name = "authors"></a>
-- [@ZimonIsHim](https://github.com/ZimonIsHim) - General development
+- [@OnsPetruske](https://github.com/pkg-dot-zip) - General development
 - [@SigmaCryo](https://github.com/SigmaCryo/) - General development
