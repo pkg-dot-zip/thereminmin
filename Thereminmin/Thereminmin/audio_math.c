@@ -1,10 +1,3 @@
-/*
- * audio_math.c
- *
- * Created: 29/03/2022 12:34:37
- *  Author: ZimonIsHim
- */ 
-
 const char *noteToPlay; // extern from headerfile
 
 char AUDIO_MATH_get_musical_value(double distance) {
